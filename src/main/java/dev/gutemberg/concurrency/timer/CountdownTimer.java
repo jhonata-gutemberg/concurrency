@@ -3,20 +3,26 @@ package dev.gutemberg.concurrency.timer;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class CountdownTimer {
     public static void main(final String[] args) {
         final var totalTimeInSeconds = new AtomicInteger(getTimerValueInSeconds());
+        final AtomicReference<ScheduledFuture<?>> futureRef = new AtomicReference<>();
         ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
-        scheduledExecutorService.scheduleAtFixedRate(() -> {
+        final ScheduledFuture<?> future = scheduledExecutorService.scheduleAtFixedRate(() -> {
             if (totalTimeInSeconds.get() == 0) {
                 System.out.println("Time done!");
+                futureRef.get().cancel(false);
+                scheduledExecutorService.shutdown();
                 return;
             }
             displayTimer(totalTimeInSeconds.decrementAndGet());
         }, 0, 1, TimeUnit.SECONDS);
+        futureRef.set(future);
     }
 
     public static int getTimerValueInSeconds() {
