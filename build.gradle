@@ -19,6 +19,11 @@ javafx {
     modules = ["javafx.controls"]
 }
 
+dependencies {
+    implementation 'org.kordamp.ikonli:ikonli-javafx:12.4.0'
+    implementation 'org.kordamp.ikonli:ikonli-material2-pack:12.4.0'
+}
+
 application {
-    mainClass = "dev.gutemberg.concurrency.timer.CountdownTimerApp"
+    mainClass = "dev.gutemberg.concurrency.timer.CountdownTimer"
 }

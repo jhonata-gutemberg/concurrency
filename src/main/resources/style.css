@@ -1,0 +1,66 @@
+.container {
+    -fx-background-color: #212224;
+}
+
+.controller {
+    -fx-padding: 2;
+    -fx-background-color: transparent;
+}
+
+.controller:hover {
+    -fx-background-color: #2c2c2c;
+}
+
+.controller .ikonli-font-icon {
+    -fx-icon-size: 28px;
+    -fx-icon-color: #a5a5a6;
+}
+
+.controller:pressed .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
+.title {
+    -fx-font-size: 20;
+    -fx-text-fill: white;
+    -font-weight: bold;
+}
+
+.action {
+    -fx-padding: 10 0 10 0;
+    -fx-background-color: #4cc2ff;
+}
+
+.action:hover {
+    -fx-background-color: #47b1e8;
+}
+
+.action:pressed .ikonli-font-icon {
+    -fx-icon-color: #22526b;
+}
+
+.time-container {
+    -fx-background-color: #1f1f20;
+}
+
+.divisor {
+    -fx-fill: #a5a5a6;
+    -fx-font-size: 34;
+    -fx-font-weight: bold;
+}
+
+.time-input {
+    -fx-font-size: 40;
+    -fx-text-fill: #a5a5a6;
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+    -fx-highlight-fill: #2c2c2c;
+    -fx-padding: 0;
+    -fx-alignment: center;
+    -fx-cursor: pointer;
+}
+
+.time-input:focused {
+    -fx-background-color: #2c2c2c;
+    -fx-text-fill: white;
+}

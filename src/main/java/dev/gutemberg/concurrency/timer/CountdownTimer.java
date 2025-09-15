@@ -1,5 +1,6 @@
 package dev.gutemberg.concurrency.timer;
 
+import dev.gutemberg.concurrency.timer.scenes.CreateTimerSceneBuilder;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -25,7 +26,8 @@ public class CountdownTimer extends Application {
 
     @Override
     public void start(final Stage stage) {
-        stage.setScene(new Scene(createContent(stage), 320, 350));
+        stage.setScene(CreateTimerSceneBuilder.build());
+        stage.setResizable(false);
         stage.show();
     }
 
