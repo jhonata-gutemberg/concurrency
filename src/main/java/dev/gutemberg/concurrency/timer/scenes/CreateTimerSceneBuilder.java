@@ -35,8 +35,8 @@ public class CreateTimerSceneBuilder {
         title.getStyleClass().add("title");
         layout.setTop(title);
 
-        final var timePicker = TimePickerBuilder.build();
-        layout.setCenter(timePicker);
+        final var timePickerBuilder = new TimePickerBuilder();
+        layout.setCenter(timePickerBuilder.build());
 
         final var button = new Button();
         final var icon = new FontIcon("mdmz-play_arrow");
