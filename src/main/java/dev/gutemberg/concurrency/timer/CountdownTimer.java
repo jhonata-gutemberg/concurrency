@@ -7,11 +7,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -26,8 +28,12 @@ public class CountdownTimer extends Application {
 
     @Override
     public void start(final Stage stage) {
+        final var icon = new Image(Objects.requireNonNull(getClass().getResource("/icons/app.png"))
+                .toExternalForm());
         stage.setScene(CreateTimerSceneBuilder.build());
         stage.setResizable(false);
+        stage.setTitle("Timer");
+        stage.getIcons().add(icon);
         stage.show();
     }
 
