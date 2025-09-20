@@ -1,6 +1,8 @@
 package dev.gutemberg.concurrency.timer;
 
+import dev.gutemberg.concurrency.timer.events.TimerEvent;
 import dev.gutemberg.concurrency.timer.scenes.CreateTimerSceneBuilder;
+import dev.gutemberg.concurrency.timer.scenes.TimerSceneBuilder;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -22,6 +24,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class CountdownTimer extends Application {
+    private static final double STAGE_WIDTH = 320;
+    private static final double STAGE_HEIGHT = 350;
+
     public static void main(final String[] args) {
         launch(args);
     }
@@ -30,7 +35,12 @@ public class CountdownTimer extends Application {
     public void start(final Stage stage) {
         final var icon = new Image(Objects.requireNonNull(getClass().getResource("/icons/app.png"))
                 .toExternalForm());
-        stage.setScene(CreateTimerSceneBuilder.build());
+        final var createTimerSceneBuilder = new CreateTimerSceneBuilder(STAGE_WIDTH, STAGE_HEIGHT);
+        final var timerSceneBuilder = new TimerSceneBuilder(STAGE_WIDTH, STAGE_HEIGHT);
+        stage.setScene(createTimerSceneBuilder.build());
+        stage.addEventHandler(TimerEvent.START, timerEvent -> {
+            stage.setScene(timerSceneBuilder.build());
+        });
         stage.setResizable(false);
         stage.setTitle("Timer");
         stage.getIcons().add(icon);
