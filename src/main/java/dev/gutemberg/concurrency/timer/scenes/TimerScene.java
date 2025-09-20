@@ -3,6 +3,7 @@ package dev.gutemberg.concurrency.timer.scenes;
 import dev.gutemberg.concurrency.timer.events.TimerEvent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import java.util.Objects;
 import java.util.concurrent.Executors;
@@ -22,7 +23,8 @@ public class TimerScene {
     }
 
     public Scene create() {
-        result.getStyleClass().add("title");
+        result.getStyleClass().add("time-input");
+        result.setFill(Color.WHITE);
         final var container = new StackPane(result);
         container.getStyleClass().add("container");
         final var scene =  new Scene(container, width, height);
