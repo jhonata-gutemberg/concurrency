@@ -4,6 +4,7 @@ import dev.gutemberg.concurrency.timer.events.TimerEvent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import java.util.Objects;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -21,7 +22,13 @@ public class TimerScene {
     }
 
     public Scene create() {
-        return new Scene(new StackPane(result), width, height);
+        result.getStyleClass().add("title");
+        final var container = new StackPane(result);
+        container.getStyleClass().add("container");
+        final var scene =  new Scene(container, width, height);
+        scene.getStylesheets().add(
+                Objects.requireNonNull(getClass().getResource("/css/global.css")).toExternalForm());
+        return scene;
     }
 
     public void start(final TimerEvent timerEvent) {

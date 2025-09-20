@@ -30,7 +30,7 @@ public class CreateTimerScene {
         container.getStyleClass().add("container");
         final var scene = new Scene(container, width, height);
         scene.getStylesheets().add(
-                Objects.requireNonNull(getClass().getResource("/style.css")).toExternalForm());
+                Objects.requireNonNull(getClass().getResource("/css/global.css")).toExternalForm());
         return scene;
     }
 
