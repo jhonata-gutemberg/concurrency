@@ -13,7 +13,7 @@ import javafx.scene.text.Text;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material2.Material2AL;
 
-public class TimePickerBuilder {
+public class TimePicker {
     private int hours;
     private int minutes;
     private int seconds;
@@ -21,7 +21,19 @@ public class TimePickerBuilder {
     private final TextField minutesInput = createTimeInput();
     private final TextField secondsInput = createTimeInput();
 
-    public Node build() {
+    public int getHours() {
+        return hours;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public int getSeconds() {
+        return seconds;
+    }
+
+    public Node create() {
         final var layout = new VBox(createIncrementContainer(), createTimerContainer(), createDecrementContainer());
         layout.setSpacing(10);
         layout.setAlignment(Pos.CENTER);

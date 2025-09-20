@@ -1,6 +1,6 @@
 package dev.gutemberg.concurrency.timer.scenes;
 
-import dev.gutemberg.concurrency.timer.components.TimePickerBuilder;
+import dev.gutemberg.concurrency.timer.components.TimePicker;
 import dev.gutemberg.concurrency.timer.events.TimerEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,24 +13,24 @@ import javafx.scene.layout.StackPane;
 import org.kordamp.ikonli.javafx.FontIcon;
 import java.util.Objects;
 
-public class CreateTimerSceneBuilder {
+public class CreateTimerScene {
     private final double width;
     private final double height;
+    private final TimePicker timePicker = new TimePicker();
 
-    public CreateTimerSceneBuilder(final double width, final double height) {
+    public CreateTimerScene(final double width, final double height) {
         this.width = width;
         this.height = height;
     }
 
-    public Scene build() {
+    public Scene create() {
         final var layout = createLayout();
         StackPane.setMargin(layout, new Insets(20));
         final var container = new StackPane(layout);
         container.getStyleClass().add("container");
         final var scene = new Scene(container, width, height);
         scene.getStylesheets().add(
-                Objects.requireNonNull(CreateTimerSceneBuilder.class.getResource("/style.css"))
-                        .toExternalForm());
+                Objects.requireNonNull(getClass().getResource("/style.css")).toExternalForm());
         return scene;
     }
 
@@ -39,8 +39,7 @@ public class CreateTimerSceneBuilder {
         final var title = new Label("Create new timer");
         title.getStyleClass().add("title");
         layout.setTop(title);
-        final var timePickerBuilder = new TimePickerBuilder();
-        layout.setCenter(timePickerBuilder.build());
+        layout.setCenter(timePicker.create());
         final var button = createActionButton();
         BorderPane.setAlignment(button, Pos.CENTER);
         layout.setBottom(button);
@@ -54,7 +53,12 @@ public class CreateTimerSceneBuilder {
         button.setGraphic(icon);
         button.setMaxWidth(Double.MAX_VALUE);
         button.getStyleClass().add("action");
-        button.setOnAction(actionEvent -> button.fireEvent(new TimerEvent(TimerEvent.START)));
+        button.setOnAction(actionEvent -> {
+            final int timeInSeconds = timePicker.getHours() * 3600
+                    + timePicker.getMinutes() * 60
+                    + timePicker.getSeconds();
+            button.fireEvent(new TimerEvent(TimerEvent.START, timeInSeconds));
+        });
         return button;
     }
 }
